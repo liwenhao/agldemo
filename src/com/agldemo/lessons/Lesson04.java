@@ -8,14 +8,16 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.agldemo.BaseRenderer;
-
+import android.content.Context;
 import android.opengl.GLU;
+
+import com.agldemo.Lesson;
+
 
 /**
  * Lesson 02
  */
-public class Lesson04 extends BaseRenderer {
+public class Lesson04 extends Lesson {
 
 	FloatBuffer triangle = makeFloatBuffer(new float[] {
 			// Top Of Triangle
@@ -46,10 +48,8 @@ public class Lesson04 extends BaseRenderer {
 	float rtri = 0.0f;
 	float rquad = 0.0f;
 
-	/**
-     * 
-     */
-	public Lesson04() {
+	public Lesson04(Context c) {
+		super(c, "Lesson 04", "Rotation");
 	}
 
 	public void onDrawFrame(GL10 gl, int width, int height) {

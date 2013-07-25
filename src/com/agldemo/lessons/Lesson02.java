@@ -7,15 +7,16 @@ package com.agldemo.lessons;
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
-
-import com.agldemo.BaseRenderer;
-
+import android.content.Context;
 import android.opengl.GLU;
+
+import com.agldemo.Lesson;
+
 
 /**
  * Lesson 02
  */
-public class Lesson02 extends BaseRenderer {
+public class Lesson02 extends Lesson {
 
 	FloatBuffer triangle = makeFloatBuffer(new float[] {
 			// Top Of Triangle
@@ -35,11 +36,8 @@ public class Lesson02 extends BaseRenderer {
 			// Bottom Right Of The Quad
 			-1.0f, -1.0f, 0.0f });
 
-	/**
-     * 
-     */
-	public Lesson02() {
-
+	public Lesson02(Context c) {
+		super(c, "Lesson 02", "Your First Polygon");
 	}
 
 	public void onDrawFrame(GL10 gl, int width, int height) {

@@ -8,15 +8,18 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.agldemo.BaseRenderer;
+import com.agldemo.Lesson;
+import com.agldemo.R;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLU;
 
 /**
  * Lesson 08
  */
-public class Lesson08 extends BaseRenderer {
+public class Lesson08 extends Lesson {
 
 	FloatBuffer quad = makeFloatBuffer(new float[] {
 			// FRONT
@@ -151,18 +154,9 @@ public class Lesson08 extends BaseRenderer {
 
 	int texture = -1;
 
-	/**
-     * 
-     */
-	public Lesson08() {
-	}
-
-	public Bitmap getBitmap() {
-		return mBitmap;
-	}
-
-	public void setBitmap(Bitmap bitmap) {
-		mBitmap = bitmap;
+	public Lesson08(Context c) {
+		super(c, "Lesson 08", "Blending");
+		mBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.glass);
 	}
 
 	public void onDrawFrame(GL10 gl, int width, int height) {

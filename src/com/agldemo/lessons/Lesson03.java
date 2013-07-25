@@ -5,17 +5,17 @@
 package com.agldemo.lessons;
 
 import java.nio.FloatBuffer;
-
 import javax.microedition.khronos.opengles.GL10;
 
-import com.agldemo.BaseRenderer;
-
+import android.content.Context;
 import android.opengl.GLU;
+
+import com.agldemo.Lesson;
 
 /**
  * Lesson 02
  */
-public class Lesson03 extends BaseRenderer {
+public class Lesson03 extends Lesson {
 	FloatBuffer triangle = makeFloatBuffer(new float[] {
 			// Top Of Triangle
 			0.0f, 1.0f, 0.0f,
@@ -42,11 +42,8 @@ public class Lesson03 extends BaseRenderer {
 			// Bottom Right Of The Quad
 			-1.0f, -1.0f, 0.0f });
 
-	/**
-     * 
-     */
-	public Lesson03() {
-
+	public Lesson03(Context c) {
+		super(c, "Lesson 03", "Adding Color");
 	}
 
 	public void onDrawFrame(GL10 gl, int width, int height) {

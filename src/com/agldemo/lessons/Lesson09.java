@@ -8,15 +8,18 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
-import com.agldemo.BaseRenderer;
+import com.agldemo.Lesson;
+import com.agldemo.R;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLU;
 
 /**
  * Lesson 09
  */
-public class Lesson09 extends BaseRenderer {
+public class Lesson09 extends Lesson {
 
 	FloatBuffer quad = makeFloatBuffer(new float[] {
 			//
@@ -54,10 +57,10 @@ public class Lesson09 extends BaseRenderer {
 
 	private Star stars[] = new Star[25];
 
-	/**
-     * 
-     */
-	public Lesson09() {
+	public Lesson09(Context c) {
+		super(c, "Lesson 09", "Moving Bitmaps In 3D Space");
+		mBitmap = BitmapFactory.decodeResource(c.getResources(), R.drawable.star);	
+
 		for (int i = 0; i < stars.length; i++) {
 			stars[i] = new Star();
 			stars[i].angle = 0.0f;
@@ -66,14 +69,6 @@ public class Lesson09 extends BaseRenderer {
 			stars[i].g = (float) Math.random();
 			stars[i].b = (float) Math.random();
 		}
-	}
-
-	public Bitmap getBitmap() {
-		return mBitmap;
-	}
-
-	public void setBitmap(Bitmap bitmap) {
-		mBitmap = bitmap;
 	}
 
 	public void onDrawFrame(GL10 gl, int width, int height) {

@@ -20,7 +20,7 @@ import com.agldemo.GLView.Renderer;
  */
 public abstract class BaseRenderer implements Renderer {
 
-    protected static FloatBuffer makeFloatBuffer(float[] arr) {
+	public static FloatBuffer makeFloatBuffer(float[] arr) {
         ByteBuffer bb = ByteBuffer.allocateDirect(arr.length * 4);
         bb.order(ByteOrder.nativeOrder());
         FloatBuffer fb = bb.asFloatBuffer();
@@ -29,7 +29,7 @@ public abstract class BaseRenderer implements Renderer {
         return fb;
     }
 
-    protected static int loadTexture(GL10 gl, Bitmap bmp) {
+	public static int loadTexture(GL10 gl, Bitmap bmp) {
         gl.glEnable(GL10.GL_TEXTURE_2D);
 
         int[] tex = new int[1];

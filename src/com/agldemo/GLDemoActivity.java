@@ -4,12 +4,12 @@
  */
 package com.agldemo;
 
-import com.agldemo.GLView.Renderer;
+import java.util.ArrayList;
+
 import com.agldemo.lessons.*;
 
 import android.app.ListActivity;
 import android.content.Context;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,22 +19,7 @@ import android.widget.TextView;
 
 public class GLDemoActivity extends ListActivity {
 	private GLViewStage mStage;
-
-	private Renderer lesson02 = new Lesson02();
-
-	private Renderer lesson03 = new Lesson03();
-
-	private Renderer lesson04 = new Lesson04();
-
-	private Renderer lesson05 = new Lesson05();
-
-	private Lesson06 lesson06 = new Lesson06();
-
-	private Lesson07 lesson07 = new Lesson07();
-
-	private Lesson08 lesson08 = new Lesson08();
-
-	private Lesson09 lesson09 = new Lesson09();
+	private ArrayList<Lesson> mLessons = new ArrayList<Lesson>();
 
 	/** Called when the activity is first created. */
 	@Override
@@ -43,31 +28,27 @@ public class GLDemoActivity extends ListActivity {
 
 		mStage = new GLViewStage(getWindow());
 
+		mLessons.add(new Lesson01(this));
+		mLessons.add(new Lesson02(this));
+		mLessons.add(new Lesson03(this));
+		mLessons.add(new Lesson04(this));
+		mLessons.add(new Lesson05(this));
+		mLessons.add(new Lesson06(this));
+		mLessons.add(new Lesson07(this));
+		mLessons.add(new Lesson08(this));
+		mLessons.add(new Lesson09(this));
+
 		setListAdapter(new LessonsAdapter(this));
 		getListView().setScrollingCacheEnabled(false);
-
-		lesson06.setBitmap(BitmapFactory.decodeResource(getResources(),
-				R.drawable.robot));
-		lesson07.setBitmap(BitmapFactory.decodeResource(getResources(),
-				R.drawable.crate));
-		lesson08.setBitmap(BitmapFactory.decodeResource(getResources(),
-				R.drawable.glass));
-		lesson09.setBitmap(BitmapFactory.decodeResource(getResources(),
-				R.drawable.star));
-
 	}
 
-	/**
-	 * A sample ListAdapter that presents content from arrays of speeches and
-	 * text.
-	 */
 	private class LessonsAdapter extends BaseAdapter {
 		public LessonsAdapter(Context context) {
 			mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		}
 
 		public int getCount() {
-			return mTitles.length;
+			return mLessons.size();
 		}
 
 		public Object getItem(int position) {
@@ -84,55 +65,25 @@ public class GLDemoActivity extends ListActivity {
 			}
 
 			// renderer
+			Lesson lesson = mLessons.get(position);
 			GLView glview = (GLView) convertView
 					.findViewById(R.id.gl_list_item_glview);
-			glview.setRenderer(getRenderer(position));
+			glview.setRenderer(lesson);
 
 			// title
 			TextView title = (TextView) convertView
 					.findViewById(R.id.gl_list_item_title);
-			title.setText(mTitles[position]);
+			title.setText(lesson.getTitle());
 
 			// detail
 			TextView detail = (TextView) convertView
 					.findViewById(R.id.gl_list_item_detail);
-			detail.setText(mDetails[position]);
+			detail.setText(lesson.getDetails());
 
 			return convertView;
 		}
 
-		private Renderer getRenderer(int pos) {
-			switch (pos) {
-			case 0:
-				return lesson02;
-			case 1:
-				return lesson03;
-			case 2:
-				return lesson04;
-			case 3:
-				return lesson05;
-			case 4:
-				return lesson06;
-			case 5:
-				return lesson07;
-			case 6:
-				return lesson08;
-			case 7:
-				return lesson09;
-			default:
-				return lesson05;
-			}
-		}
-
 		private LayoutInflater mInflater;
-
-		private String[] mTitles = { "Lesson 02", "Lesson 03", "Lesson 04",
-				"Lesson 05", "Lesson 06", "Lesson 07", "Lesson 08", "Lesson 09" };
-
-		private String[] mDetails = { "Your First Polygon", "Adding Color",
-				"Rotation", "3D Shapes", "Texture Mapping",
-				"Texture Filters, Lighting & Keyboard Control", "Blending",
-				"Moving Bitmaps In 3D Space" };
 	}
 
 	/*
